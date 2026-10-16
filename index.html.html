@@ -1,302 +1,277 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নাটোর দুর্গা পূজা ২০২৬ - মণ্ডপ লোকেশন গাইড</title>
+    <title>নাটোর পূজা মণ্ডপ ও মন্দির তালিকা</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-amber-50 font-sans text-gray-800">
-
-    <!-- Header -->
-    <header class="bg-red-700 text-white text-center py-8 shadow-lg border-b-4 border-amber-400">
-        <h1 class="text-3xl md:text-4xl font-bold">🙏 নাটোর দুর্গা পূজা ২০২৬ 🙏</h1>
-        <p class="text-amber-200 text-sm md:text-base mt-2">নাটোরে পূজার তালিকা ও এলাকার মণ্ডপসমূহ</p>
-    </header>
-
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto p-4 md:p-6 mt-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-           <!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নাটোর দুর্গা পূজা ২০২৬ - সঠিক মণ্ডপ লোকেশন গাইড</title>
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Leaflet CSS for Interactive Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        #map {
-            height: 480px;
-            width: 100%;
-            border-radius: 0.75rem;
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
         }
     </style>
 </head>
-<body class="bg-amber-50 font-sans text-gray-800">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- Header -->
-    <header class="bg-red-700 text-white text-center py-6 shadow-lg border-b-4 border-amber-400">
-        <h1 class="text-3xl md:text-4xl font-bold">🙏 নাটোর দুর্গা পূজা ২০২৬ 🙏</h1>
-        <p class="text-amber-200 text-sm md:text-base mt-2">সকল মণ্ডপের সঠিক ভৌগোলিক অবস্থান ও লোকেশন গাইড</p>
+    <!-- Header / Banner Section -->
+    <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white shadow-lg">
+        <div class="max-w-4xl mx-auto px-4 py-8 text-center">
+            <!-- দুর্গা প্রতিমার ছবি -->
+            <div class="mb-4 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1603565816030-6b384eef2ce6?auto=format&fit=crop&w=600&q=80" alt="দুর্গা প্রতিমা" class="w-32 h-32 object-cover rounded-full border-4 border-amber-300 shadow-md">
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">নাটোর দুর্গাপূজা ২০২৬</h1>
+            <p class="text-amber-100 text-sm md:text-base">রেঞ্জভিত্তিক তালিকা ও সকল পূজা মণ্ডপের অবস্থান এক নজরে</p>
+        </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto p-4 md:p-6 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
 
-        <!-- Map Section -->
-        <section class="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-amber-200">
-            <h2 class="text-xl md:text-2xl font-bold text-red-700 mb-4 flex items-center gap-2">
-                📍 নাটোর শহরের মণ্ডপসমূহের লাইভ ম্যাপ
+        <!-- Add New Data Form Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 mb-8">
+            <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <span>➕</span> নতুন মণ্ডপ বা মন্দির যোগ করুন
             </h2>
-            <div id="map" class="shadow-inner border border-gray-300"></div>
-            <p class="text-xs text-gray-500 mt-2 text-center">* ম্যাপের পিনগুলোতে ক্লিক করে নির্দিষ্ট মণ্ডপের নাম ও বিস্তারিত জেনে নিন।</p>
+            <form id="addForm" onsubmit="addNewMandop(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">নাম *</label>
+                    <input type="text" id="newName" placeholder="মণ্ডপ/মন্দিরের নাম" required class="w-full px-3.5 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">ঠিকানা *</label>
+                    <input type="text" id="newAddress" placeholder="যেমন: লাল বাজার, নাটোর" required class="w-full px-3.5 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">গুগল ম্যাপ লোকেশন লিংক</label>
+                    <input type="url" id="newMap" placeholder="https://maps.app.goo.gl/..." class="w-full px-3.5 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+                </div>
+                <div class="md:col-span-3 flex justify-end">
+                    <button type="submit" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2.5 rounded-xl shadow transition duration-200 flex items-center justify-center gap-2">
+                        <span>সংরক্ষণ করুন</span>
+                    </button>
+                </div>
+            </form>
         </section>
 
-        <!-- Mandop List Section -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">এলাকাভিত্তিক সঠিক মণ্ডপ তালিকা</h2>
+        <!-- TOP SECTION: Area/Range-wise List (From Banner Image) -->
+        <section class="mb-10">
+            <div class="bg-gradient-to-r from-amber-500 to-red-600 text-white p-4 rounded-xl shadow-sm mb-6 text-center">
+                <h2 class="text-xl md:text-2xl font-bold">📍 নাটোরের রেঞ্জভিত্তিক পূজার তালিকা</h2>
+                <p class="text-xs md:text-sm text-amber-100 mt-1">* এলাকা ভিত্তিক পূজা মণ্ডপের তথ্য *</p>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- ১. নাটোর রাজবাড়ি -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-red-100 text-red-700 px-2.5 py-0.5 rounded-full">বঙ্গজল-উপরবাজার রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">নাটোর রাজবাড়ী মন্দির (২টি)</h3>
-                    <p class="text-sm text-gray-600 mt-1">ঠিকানা: নাটোর রাজবাড়ী এলাকা</p>
-                    <a href="https://maps.google.com/?q=Natore+Rajbari" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Range 1 -->
+                <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-amber-900 border-b border-amber-200 pb-2 mb-3">#বঙ্গজল টু উপরবাজার রেঞ্জ</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">
+                        <li>নাটোর রাজবাড়িতে – ২ টি</li>
+                        <li>শ্রী শ্রী রামচন্দ্র মন্দির – ১টি (ভুট্টার প্রতিমা)</li>
+                        <li>বঙ্গজল মোড়ে – ১টি</li>
+                        <li>উপরবাজার আখড়া – ১টি</li>
+                    </ul>
+                    <div class="mt-3 text-right font-bold text-amber-800 text-xs bg-amber-100 inline-block px-3 py-1 rounded-full">মোট ৫টি</div>
                 </div>
 
-                <!-- ২. শ্রী শ্রী রামচন্দ্র মন্দির -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-red-100 text-red-700 px-2.5 py-0.5 rounded-full">বঙ্গজল-উপরবাজার রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">শ্রী শ্রী রামচন্দ্র মন্দির</h3>
-                    <p class="text-sm text-gray-600 mt-1">ঠিকানা: উত্তর চৌকিরপাড়, নাটোর <br><span class="text-red-600 font-medium">বিশেষ আকর্ষণ: ভুট্টার প্রতিমা</span></p>
-                    <a href="https://maps.google.com/?q=Chokirpar+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+                <!-- Range 2 -->
+                <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-rose-900 border-b border-rose-200 pb-2 mb-3">#উপরবাজার টু লালবাজার পিলখানা রেঞ্জ</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">
+                        <li>আমতলা তরুণ সংঘ</li>
+                        <li>কদমতলা রবিসুতম সংঘ (বড় আলোকসজ্জা)</li>
+                        <li>জয়কালী বাড়ি (কেন্দ্রীয় মন্দির)</li>
+                        <li>ভবানী গলির সোনালী সংঘ</li>
+                        <li>পিলখানা চিন্তামনি সংঘ</li>
+                    </ul>
+                    <div class="mt-3 text-right font-bold text-rose-800 text-xs bg-rose-100 inline-block px-3 py-1 rounded-full">মোট ৫টি</div>
                 </div>
 
-                <!-- ৩. জয়কালী বাড়ি -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full">লালবাজার পিলখানা</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">জয়কালী বাড়ি (কেন্দ্রীয় মন্দির)</h3>
-                    <p class="text-sm text-gray-600 mt-1">ঠিকানা: লালবাজার, নাটোর</p>
-                    <a href="https://maps.google.com/?q=Joykali+Bari+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+                <!-- Range 3 -->
+                <div class="bg-orange-50 border border-orange-200 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-orange-900 border-b border-orange-200 pb-2 mb-3">#চৌকিরপার রেঞ্জ</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">
+                        <li>সরকার বাড়ি পুজো – ১টি</li>
+                        <li>হরিজন কলোনি ও নতুন পাড়া – ২ টি</li>
+                        <li>উত্তর চৌকিরপার ও দক্ষিণ চৌকিরপার – ২ টি</li>
+                        <li>রায়মহালীতে – ১টি</li>
+                    </ul>
+                    <div class="mt-3 text-right font-bold text-orange-800 text-xs bg-orange-100 inline-block px-3 py-1 rounded-full">মোট ৬টি</div>
                 </div>
 
-                <!-- ৪. বৈকালী সংঘ -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">নিচাবাজার রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">বৈকালী সংঘ মণ্ডপ</h3>
-                    <p class="text-sm text-red-600 font-semibold mt-1">★ নাটোরের সব থেকে বড় পুজো মণ্ডপ[span_0](start_span)[span_0](end_span)</p>
-                    <a href="https://maps.google.com/?q=Nichabazar+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+                <!-- Range 4 -->
+                <div class="bg-red-50 border border-red-200 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-red-900 border-b border-red-200 pb-2 mb-3">#কাপুড়িয়াপট্টি রোড রেঞ্জ</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">
+                        <li>কাপুড়িয়াপট্টি কালীবাড়ি হল – ১টি (শোলা প্যান্ডেল)</li>
+                        <li>শুকুলপট্টি জোড়াশিব মন্দির – ১টি</li>
+                    </ul>
+                    <div class="mt-3 text-right font-bold text-red-800 text-xs bg-red-100 inline-block px-3 py-1 rounded-full">মোট ২ টি</div>
                 </div>
 
-                <!-- ৫. কাপুড়িয়াপটি কালীবাড়ি হল -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-full">কাপুড়িয়াপটি রোড</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">কাপুড়িয়াপটি কালীবাড়ি হল</h3>
-                    <p class="text-sm text-gray-600 mt-1">বিশেষ আকর্ষণ: শোলার প্যান্ডেল[span_1](start_span)[span_1](end_span)</p>
-                    <a href="https://maps.google.com/?q=Kapuriapatti+Kalibari+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+                <!-- Range 5 -->
+                <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-emerald-900 border-b border-emerald-200 pb-2 mb-3">#নিচাবাজার রেঞ্জ</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">
+                        <li>বিহার জিউ আখড়া – ১টি</li>
+                        <li>মন্দির মার্কেট – ১টি</li>
+                        <li>বৈকালী সংঘ – ১টি (নাটোরের সব থেকে বড় পুজো মণ্ডপ)</li>
+                        <li>পৌরসভার সামনে মহাপ্রভুর আখড়া – ১টি</li>
+                    </ul>
+                    <div class="mt-3 text-right font-bold text-emerald-800 text-xs bg-emerald-100 inline-block px-3 py-1 rounded-full">মোট ৪টি</div>
                 </div>
 
-                <!-- ৬. হরিশপুর রেঞ্জ -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full">হরিশপুর রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">হরিশপুর ঘোষপাড়া মণ্ডপ</h3>
-                    <p class="text-sm text-gray-600 mt-1">বিশেষ আকর্ষণ: সাবুদানার প্রতিমা</p>
-                    <a href="https://maps.google.com/?q=Harishpur+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
-                </div>
-
-                <!-- ৭. কদমতলা রবিসুতম সংঘ -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full">লালবাজার পিলখানা</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">কদমতলা রবিসুতম সংঘ</h3>
-                    <p class="text-sm text-gray-600 mt-1">বিশেষ আকর্ষণ: বড় আলোকসজ্জা[span_2](start_span)[span_2](end_span)</p>
-                    <a href="https://maps.google.com/?q=Kadamtala+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
-                </div>
-
-                <!-- ৮. বিহার জিউ আখড়া -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">নিচাবাজার রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">বিহার জিউ আখড়া</h3>
-                    <p class="text-sm text-gray-600 mt-1">ঠিকানা: নিচাবাজার, নাটোর</p>
-                    <a href="https://maps.google.com/?q=Bihar+Jiu+Akhra+Natore" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
-                </div>
-
-                <!-- ৯. পৌরসভার সামনে মহাপ্রভুর আখড়া -->
-                <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-600 hover:shadow-lg transition">
-                    <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">নিচাবাজার রেঞ্জ</span>
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">মহাপ্রভুর আখড়া</h3>
-                    <p class="text-sm text-gray-600 mt-1">ঠিকানা: নাটোর পৌরসভার সামনে</p>
-                    <a href="https://maps.google.com/?q=Natore+Pouroshova" target="_blank" class="mt-4 inline-block w-full text-center bg-red-600 text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">
-                        সঠিক ম্যাপ লোকেশন 🗺️
-                    </a>
+                <!-- Other Areas -->
+                <div class="bg-slate-100 border border-slate-300 p-5 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-800 border-b border-slate-300 pb-2 mb-3">#অন্যান্য এলাকা</h3>
+                    <ul class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-slate-700">
+                        <li>• কানাইখালীতে – ১টি</li>
+                        <li>• কান্দিভিটুয়ায়ে – ১টি</li>
+                        <li>• ঘোষপাড়া – ১টি</li>
+                        <li>• সদর হাসপাতাল – ১টি</li>
+                        <li>• ফৌজদারি পাড়া – ১টি</li>
+                        <li>• ফাজদারি পাড়া – ১টি</li>
+                        <li>• ধোপাপাড়া – ১টি</li>
+                        <li>• সাহাপাড়া – ১টি</li>
+                        <li>• বড়গাছা পালপাড়া – ১টি</li>
+                        <li>• হুগুলবাড়িয়া – ২ টি</li>
+                        <li>• তেবেরিয়া – ২টি</li>
+                        <li>• বনবেলঘরিয়া – ১টি</li>
+                        <li>• হরিশপুর রেঞ্জের – ৩টি (সাবুদানা প্রতিমা)</li>
+                        <li>• ভবানীগঞ্জের মোড় – ১টি</li>
+                        <li>• চাইপাড়া তে – ২ টি</li>
+                        <li>• হাজরা নাটোর – ৩টি</li>
+                        <li>• ভাটোদাঁড়া – ১টি (এসাইডে আরো ১টি)</li>
+                        <li>• দিঘাপতিয়া রেঞ্জ – ২টি</li>
+                    </ul>
                 </div>
 
             </div>
         </section>
 
-    </main>
+        <!-- Divider -->
+        <hr class="border-slate-300 my-8">
 
-    <!-- Footer -->
-    <footer class="text-center py-6 text-gray-600 text-sm bg-amber-100 border-t mt-12">
-        <p>প্রচারে: নাটোরের পূজা | ২০২৬ সঠিক লোকেশন নির্দেশিকা</p>
-        <p class="mt-1">&copy; ২০২৬ Vercel Ready Interactive Map App</p>
-    </footer>
+        <!-- SEARCH & MAP LIST SECTION -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-slate-800">🛕 বিস্তারিত মণ্ডপ ও ম্যাপ লোকেশন</h2>
+        </div>
 
-    <!-- Leaflet JS for Map functionality -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // নাটোর শহরের সঠিক কেন্দ্রীয় স্থানাঙ্ক
-        const map = L.map('map').setView([24.4108, 89.0070], 15);
+        <!-- Search Bar -->
+        <div class="mb-6">
+            <input type="text" id="searchInput" placeholder="🔍 মণ্ডপ বা মন্দিরের নাম দিয়ে খুঁজুন..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm text-sm">
+        </div>
 
-        // OpenStreetMap টাইলস লোড
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        // সঠিক স্থানাঙ্কসহ মণ্ডপসমূহের তালিকা
-        const mandops = [
-            { name: "নাটোর রাজবাড়ী মন্দির", lat: 24.4175, lng: 89.0015, desc: "বঙ্গজল-উপরবাজার রেঞ্জ" },
-            { name: "শ্রী শ্রী রামচন্দ্র মন্দির (ভুট্টার প্রতিমা)", lat: 24.4132, lng: 89.0045, desc: "উত্তর চৌকিরপাড়" },
-            { name: "জয়কালী বাড়ি (কেন্দ্রীয় মন্দির)", lat: 24.4160, lng: 89.9905, desc: "লালবাজার পিলখানা রেঞ্জ" },
-            { name: "বৈকালী সংঘ (সবচেয়ে বড় মণ্ডপ)", lat: 24.4082, lng: 89.0088, desc: "নিচাবাজার রেঞ্জ" },
-            { name: "কাপুড়িয়াপটি কালীবাড়ি হল", lat: 24.4105, lng: 89.0042, desc: "শোলার প্যান্ডেল" },
-            { name: "হরিশপুর ঘোষপাড়া মণ্ডপ (সাবুদানার প্রতিমা)", lat: 24.3985, lng: 89.0145, desc: "হরিশপুর রেঞ্জ" },
-            { name: "পৌরসভার সামনে মহাপ্রভুর আখড়া", lat: 24.4072, lng: 89.0080, desc: "নিচাবাজার রেঞ্জ" }
-        ];
-
-        // ম্যাপে মার্কার যোগ করা
-        mandops.forEach(mandop => {
-            L.marker([mandop.lat, mandop.lng]).addTo(map)
-                .bindPopup(`<b>${mandop.name}</b><br>${mandop.desc}`);
-        });
-    </script>
-</body>
-    </html>
-    <!-- বঙ্গজল টু উপরবাজার রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># বঙ্গজল টু উপরবাজার রেঞ্জ (মোট ৫ টি)</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• নাটোর রাজবাড়ি তে - ২ টি</li>
-                    <li class="border-b pb-1">• শ্রী শ্রী রামচন্দ্র মন্দির - ১ টি</li>
-                    <li class="border-b pb-1">• বঙ্গজল মোড়ে - ১ টি</li>
-                    <li class="border-b pb-1">• উপরবাজার আখড়া - ১ টি</li>
-                </ul>
-                <a href="https://maps.app.goo.gl/G74Sos9QJYN8MpD1A" 
-                    href="https://maps.app.goo.gl/W1KK9LG89NH2cw6m8"
-                    href="https://maps.app.goo.gl/ti8BQMpiiVBiibcE6"target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
-            <!-- উপরবাজার টু লালবাজার পিলখানা রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># উপরবাজার টু লালবাজার পিলখানা (মোট ৫ টি)</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• আমতলা তরুন সংঘ</li>
-                    <li class="border-b pb-1">• কদমতলা রবিসুতম সংঘ</li>
-                    <li class="border-b pb-1">• জয়কালী বাড়ি (কেন্দ্রীয় মন্দির)</li>
-                    <li class="border-b pb-1">• ভবনীর গলি সোনালী সংঘ</li>
-                    <li class="border-b pb-1">• পিলখানা চিন্তামণি সংঘ</li>
-                </ul>
-                <a href="https://maps.google.com/?q=Joykali+Bari+Natore" target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
-            <!-- চোকিরপাড় রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># চোকিরপাড় রেঞ্জ (মোট ৬ টি)</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• সরকার বাড়ি পুজো - ১ টি</li>
-                    <li class="border-b pb-1">• হরিজন কলোনি ও নতুন পাড়া - ২ টি</li>
-                    <li class="border-b pb-1">• উত্তর চোকিরপাড় ও দক্ষিণ চোকিরপাড় - ২ টি</li>
-                    <li class="border-b pb-1">• রায়ানহাটি তে - ১ টি</li>
-                </ul>
-                <a href="https://maps.google.com/?q=Chokirpar+Natore" target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
-            <!-- কাপুড়িয়াপটি রোড রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># কাপুড়িয়াপটি রোড রেঞ্জ (মোট ২ টি)</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• কাপুড়িয়াপটি কালীবাড়ি হল - ১ টি</li>
-                    <li class="border-b pb-1">• শুকুলপট্টি জোড়শিব মন্দির - ১ টি</li>
-                </ul>
-                <a href="https://maps.google.com/?q=Kapuriapatti+Natore" target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
-            <!-- নিচাবাজার রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># নিচাবাজার রেঞ্জ (মোট ৪ টি)</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• বিহার জিউ আখড়া - ১ টি</li>
-                    <li class="border-b pb-1">• মন্দির মার্কেট - ১ টি</li>
-                    <li class="border-b pb-1">• বৈকালী সংঘ - ১ টি</li>
-                    <li class="border-b pb-1">• পৌরসভার সামনে মহাপ্রভুর আখড়া - ১ টি</li>
-                </ul>
-                <a href="https://maps.google.com/?q=Baikali+Sangha+Natore" target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
-            <!-- অন্যান্য এলাকা / রেঞ্জ -->
-            <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-red-600">
-                <h3 class="text-lg font-bold text-red-700 mb-3"># হরিশপুর ও অন্যান্য এলাকা</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="border-b pb-1">• হরিশপুর রেঞ্জ - ৩ টি</li>
-                    <li class="border-b pb-1">• ভবানীগঞ্জের মোড় - ১ টি</li>
-                    <li class="border-b pb-1">• কানাইখালীতে - ১ টি, কান্দিভিটায় - ১ টি</li>
-                    <li class="border-b pb-1">• তেবাড়িয়া - ২ টি, বনবেলঘরিয়া - ১ টি</li>
-                    <li class="border-b pb-1">• দীঘাপতিয়া রেঞ্জ - ২ টি</li>
-                </ul>
-                <a href="https://maps.google.com/?q=Harishpur+Natore" target="_blank" 
-                   class="mt-4 block text-center bg-red-600 text-white text-xs py-2 rounded hover:bg-red-700 transition">
-                   লোকেশন দেখুন (ম্যাপ)
-                </a>
-            </div>
-
+        <!-- Mandop List Grid -->
+        <div id="mandopList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- JavaScript দ্বারা ডায়নামিকালি লোড হবে -->
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-6 text-gray-600 text-sm mt-12 bg-amber-100 border-t">
-        <p>প্রচারে: নাটোরের পূজা | ২০২৬ দুর্গা পূজা নির্দেশিকা</p>
-        <p class="mt-1">&copy; ২০২৬ Vercel Ready Web App</p>
+    <footer class="bg-slate-900 text-white mt-12 py-8 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-slate-400 mb-3">সকল আপডেট পেতে আমাদের অফিসিয়াল ফেসবুক পেজে যুক্ত থাকুন</p>
+            <a href="https://www.facebook.com/natoreerpujo" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-xl transition duration-200 shadow-md">
+                📘 নাটোরের পুজো ফেসবুক পেজ ভিজিট করুন
+            </a>
+            <p class="text-slate-500 text-sm mt-6">&copy; ২০২৬ নাটোর পূজা কমিটি | সর্বস্বত্ব সংরক্ষিত</p>
+        </div>
     </footer>
 
+    <!-- Script Section -->
+    <script>
+        // প্রাথমিক ডেটা
+        const initialData = [
+            { id: 1, name: "১. শ্রী শ্রী রাম চন্দ্র মন্দির (ভুট্টার প্রতিমা)", address: "উত্তর চৌকিরপার, নাটোর", map: "https://maps.app.goo.gl/1BiiKGDaPQ2WDnKTA" },
+            { id: 2, name: "২. রাজবাড়ী মন্দির", address: "নাটোর", map: "https://maps.app.goo.gl/8rJPGjkuc3FbmBan6" },
+            { id: 3, name: "৩. বঙ্গজল কালী মন্দির", address: "নাটোর", map: "https://maps.app.goo.gl/aZwuLEpww1kUVHddA" },
+            { id: 4, name: "৪. আমতলা তরুণ সংঘ", address: "কদম তলা, চেম্বার অব কমার্স এর পাশে", map: "https://maps.app.goo.gl/34oGo7wfcoaop8Gq9" },
+            { id: 5, name: "৫. রবি সুতম সংঘ (সেরা আলোকসজ্জা)", address: "কদম তলা, নাটোর", map: "https://maps.app.goo.gl/o6LhaDd9L59yAEmZ7" },
+            { id: 6, name: "৬. জয়কালী মাতার মন্দির (কেন্দ্রীয় মন্দির)", address: "লাল বাজার, নাটোর", map: "https://maps.app.goo.gl/ShTxg3M3a4Sxy6EQ6" },
+            { id: 7, name: "৭. সোনালী সংঘ", address: "লাল বাজার, নাটোর", map: "https://maps.app.goo.gl/v8YgnBMN9mkZmdiN7" },
+            { id: 8, name: "৮. চিন্তা মনি মন্দির", address: "রসূলের মোড়, নাটোর", map: "https://maps.app.goo.gl/F9bK8s12tvZypigr8" },
+            { id: 9, name: "৯. বিহারী জিউ আখড়া", address: "নিচা বাজার, নাটোর", map: "https://maps.app.goo.gl/QLvAxkuEndVhaLsZ6" },
+            { id: 10, name: "১০. কাপুরিয়া পট্টি কালীবাড়ি হল", address: "নাটোর", map: "https://maps.app.goo.gl/pdjT78RC3eSwSnLq6" },
+            { id: 11, name: "১১. জোড়া শিব মন্দির", address: "শুকুল পট্টি, নাটোর", map: "https://maps.app.goo.gl/GeRFViJFhJVY9QdF6" },
+            { id: 12, name: "১২. বৈকালী সংঘ (সেরা সাজসজ্জা)", address: "হাসপাতাল রোড, নাটোর", map: "https://maps.app.goo.gl/oADBFKir5vfDWpBs7" },
+            { id: 13, name: "১৩. মহা প্রভু আখড়া", address: "পৌরসভার সামনে, নাটোর", map: "https://maps.app.goo.gl/LdHJPpxLZYpz36SNA" },
+            { id: 14, name: "১৪. প্রভাতী সংঘ", address: "ফৌজদারি পারা, নাটোর", map: "#" },
+            { id: 15, name: "১৫. বন্ধু স্মৃতি সংঘ", address: "পশু হাসপাতালের সামনে, নাটোর", map: "#" },
+            { id: 16, name: "১৬. পালপাড়া দুর্গা মন্দির", address: "বড়গাছা, পালপাড়া", map: "https://maps.app.goo.gl/4vM3yg41oCYDsMgcA" },
+            { id: 17, name: "১৭. অন্নপূর্ণা সংঘ", address: "কান্দিভিটা, নাটোর", map: "https://maps.app.goo.gl/xGN9QuJNPBkQfWnv8" }
+        ];
+
+        // লোড ডেটা
+        let mandops = JSON.parse(localStorage.getItem('natore_mandops')) || initialData;
+
+        function renderList(filter = '') {
+            const listContainer = document.getElementById('mandopList');
+            listContainer.innerHTML = '';
+
+            const filtered = mandops.filter(m => 
+                m.name.toLowerCase().includes(filter.toLowerCase()) || 
+                m.address.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            if(filtered.length === 0) {
+                listContainer.innerHTML = `<p class="col-span-2 text-center text-slate-500 py-8">কোনো তথ্য পাওয়া যায়নি।</p>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition duration-200 flex flex-col justify-between";
+                
+                card.innerHTML = `
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-1">${item.name}</h3>
+                        <p class="text-slate-600 text-sm mb-4">📍 ${item.address}</p>
+                    </div>
+                    <div>
+                        ${item.map && item.map !== '#' ? 
+                            `<a href="${item.map}" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3.5 py-1.5 rounded-lg transition">
+                                🗺️ গুগল ম্যাপে দেখুন
+                            </a>` : 
+                            `<span class="text-slate-400 text-sm italic">লোকেশন উপলব্ধ নয়</span>`
+                        }
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        // সার্চ হ্যান্ডেলার
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderList(e.target.value);
+        });
+
+        // নতুন ডেটা যোগ করা
+        function addNewMandop(e) {
+            e.preventDefault();
+            const name = document.getElementById('newName').value;
+            const address = document.getElementById('newAddress').value;
+            const map = document.getElementById('newMap').value || '#';
+
+            const newItem = {
+                id: mandops.length + 1,
+                name: `${mandops.length + 1}. ${name}`,
+                address,
+                map
+            };
+
+            mandops.push(newItem);
+            localStorage.setItem('natore_mandops', JSON.stringify(mandops));
+            
+            renderList();
+            document.getElementById('addForm').reset();
+        }
+
+        // ইনিশিয়াল রেন্ডার
+        renderList();
+    </script>
 </body>
 </html>
