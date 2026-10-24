@@ -1,0 +1,19 @@
+{
+  "name": "pujo2026",
+  "version": "1.0.0",
+  "description": "Natore Durga Puja 2026 - Pandal and Temple Directory",
+  "main": "index.html.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "durga-puja",
+    "natore",
+    "pandal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
